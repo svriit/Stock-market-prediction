@@ -1,33 +1,36 @@
-Stock Market Prediction Model in Real-Time
-This repository contains the code and resources for the Stock Market Prediction Model in Real-Time, a project that uses machine learning techniques and sentiment analysis to forecast stock prices and provide investment recommendations.
 
-Table of Contents
-Introduction
-Installation
-Data Collection
-Model Architecture
-Prediction
-Recommendation
-Web Scraping
-Sentiment Analysis
-Conclusion
-References
-Introduction
+# Stock Market Prediction Model in Real-Time
+
+This repository contains the code and resources for the **Stock Market Prediction Model in Real-Time**, a project that uses machine learning techniques and sentiment analysis to forecast stock prices and provide investment recommendations.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Data Collection](#data-collection)
+- [Model Architecture](#model-architecture)
+- [Prediction](#prediction)
+- [Recommendation](#recommendation)
+- [Web Scraping](#web-scraping)
+- [Sentiment Analysis](#sentiment-analysis)
+- [Conclusion](#conclusion)
+- [References](#references)
+
+## Introduction
 Stock market prediction involves projecting a company's future developments and estimating stock price directions. This project leverages LSTM neural networks to forecast stock prices and integrates sentiment analysis of news headlines for recommendation generation.
 
-Installation
+## Installation
 To run this project, clone the repository and install the necessary Python libraries.
 
-bash
-Copy code
+```bash
 git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
 pip install -r requirements.txt
-Data Collection
-The dataset is sourced from Yahoo Finance using the yfinance library. The following script can be used to download the historical stock data:
+```
 
-python
-Copy code
+## Data Collection
+The dataset is sourced from Yahoo Finance using the `yfinance` library. The following script can be used to download the historical stock data:
+
+```python
 import yfinance as yf
 
 def download_stock_data(symbol, start_date, end_date):
@@ -40,11 +43,12 @@ def download_stock_data(symbol, start_date, end_date):
 
 # Example usage
 download_stock_data('GOOG', '2000-01-01', '2023-01-01')
-Model Architecture
+```
+
+## Model Architecture
 The LSTM architecture is used to predict stock prices. Here is an example implementation:
 
-python
-Copy code
+```python
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
@@ -85,11 +89,12 @@ model.compile(optimizer='adam', loss='mean_squared_error')
 
 # Train model
 model.fit(x_train, y_train, batch_size=1, epochs=1)
-Prediction
+```
+
+## Prediction
 Once the model is trained, you can predict the stock prices for the test dataset:
 
-python
-Copy code
+```python
 # Create testing dataset
 test_data = scaled_data[train_data_len - 60:, :]
 x_test = []
@@ -120,11 +125,12 @@ plt.plot(train['Close'])
 plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
 plt.show()
-Recommendation
+```
+
+## Recommendation
 The project uses technical analysis tools such as SMA and EMA to generate buy/hold recommendations:
 
-python
-Copy code
+```python
 # Simple Moving Average (SMA)
 data['SMA_20'] = data['Close'].rolling(window=20).mean()
 
@@ -138,11 +144,12 @@ data.loc[data['Close'] > data['EMA_20'], 'Signal'] += 1
 
 data['Recommendation'] = 'Hold'
 data.loc[data['Signal'] == 2, 'Recommendation'] = 'Buy'
-Web Scraping
+```
+
+## Web Scraping
 Automate news scraping from Yahoo News for sentiment analysis:
 
-python
-Copy code
+```python
 import requests
 from bs4 import BeautifulSoup
 
@@ -160,11 +167,12 @@ def get_news(symbol):
 # Example usage
 news = get_news('GOOG')
 print(news)
-Sentiment Analysis
+```
+
+## Sentiment Analysis
 Perform sentiment analysis on the scraped news headlines:
 
-python
-Copy code
+```python
 from textblob import TextBlob
 
 def analyze_sentiment(headlines):
@@ -178,9 +186,11 @@ def analyze_sentiment(headlines):
 # Example usage
 sentiments = analyze_sentiment(news)
 print(sentiments)
-Conclusion
+```
+
+## Conclusion
 This project demonstrates a comprehensive approach to stock market prediction by combining machine learning and sentiment analysis. Future enhancements may include real-time data integration and more sophisticated sentiment analysis techniques.
 
-References
-Stock Price Prediction Using LSTM
-Sentiment Analysis Techniques
+## References
+- [Stock Price Prediction Using LSTM](#)
+- [Sentiment Analysis Techniques](#)
